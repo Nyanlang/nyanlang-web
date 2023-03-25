@@ -1,9 +1,13 @@
 import DocsTemplate from "@/components/docs-template";
 import {H1, P, Lnk} from "@/components/docs-component";
+import {NextSeo} from "next-seo";
 
 
 export default function DocsIndex() {
     return <DocsTemplate>
+        <NextSeo
+            title={"문서"}
+        />
         <H1>냥랭에 대하여...</H1>
         <P>냥랭은 <Lnk href={"https://github.com/sserve-kr"}>서브</Lnk>에 의해서 2023년 2월 25일 만들어졌다냥.</P>
         <P>

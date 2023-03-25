@@ -1,7 +1,7 @@
 import {Flex, Heading, Link, Text} from "@chakra-ui/react";
 
 export default function Index() {
-    return (
+    return (<>
         <Flex direction={"column"} align={"center"} justify={"center"} h={"100vh"} gap={"20px"}>
             <Heading as={"h1"}>Nyanlang</Heading>
             <Text>세상에서 가장 귀여운 프로그래밍 언어</Text>
@@ -16,5 +16,5 @@ export default function Index() {
                 </Link>*/}
             </Flex>
         </Flex>
-    )
+    </>)
 }
