@@ -114,9 +114,9 @@ export default function DocsBasicTutorial() {
             입력이 있는 한 계속해서 다음 주소에 입력된 문자의 유니코드 값을 저장할 거다냥.</P>
         <P>만약 입력이 끝나면, EOF 즉 0이 메모리에 저장되므로 <InCode>-</InCode> 키워드를 지나치면서 프로그램이 끝나게 되는 거다냥.</P>
         <H2 id={"comment"}>주석</H2>
-        <P><InCode>""</InCode>로 감싸는 모든 문자는 주석으로 처리된다냥.<br/>만약 키워드가 아닌 이상한 문자가 주석 밖에 있다면, 냥랭은 그 문자를 오류로 처리한다냥.</P>
+        <P><InCode>&quot;&quot;</InCode>로 감싸는 모든 문자는 주석으로 처리된다냥.<br/>만약 키워드가 아닌 이상한 문자가 주석 밖에 있다면, 냥랭은 그 문자를 오류로 처리한다냥.</P>
         <OutCode>
-            "냥냥냥. 인터프리터 바보다냥."<br />
+            &quot;냥냥냥. 인터프리터 바보다냥.&quot;<br />
             냥.
         </OutCode>
         <H1 id={"hello-world"}>Hello World 예제</H1>
@@ -129,7 +129,7 @@ export default function DocsBasicTutorial() {
 
         <P>이 예제를 실행하면 다음과 같은 결과가 나온다냥.</P>
         <OutCode>
-            $ nyan run "examples/hello world.nyan"<br/>
+            $ nyan run &quot;examples/hello world.nyan&quot;<br/>
             Hello World!
         </OutCode>
         <P>이제 이 예제를 스스로 분석해보라냥. 지금까지 배운 것들로 충분히 이해할 수 있는 코드다냥!</P>
