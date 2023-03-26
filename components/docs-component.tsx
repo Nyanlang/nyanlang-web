@@ -69,7 +69,7 @@ export function OutCode(props: { children: any }) {
     </Box>
 }
 
-export function MyTable(props: { caption?: string, head: Array<string|{name:string,isNumeric?:boolean}>, body: Array<Array<string>> }) {
+export function MyTable(props: { caption?: string, head: Array<string|{name:string,isNumeric?:boolean}>, body: Array<Array<string|number>> }) {
     return <TableContainer>
         <Table variant={"simple"}>
             {
