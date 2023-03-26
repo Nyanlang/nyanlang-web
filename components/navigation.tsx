@@ -145,19 +145,25 @@ export function DocsNavigation() {
     return <>
         <IconButton aria-label={"메뉴"} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} size={"md"} display={["block", null, null, "none"]} position={"fixed"} top={"90px"} left={"10px"} onClick={() => setIsOpen((prev) => !prev)} zIndex={100} />
         <Accordion overflowY={"auto"} allowToggle display={[isOpen ? "block" : "none", null, null, "block"]} position={["relative", null, null, "sticky"]} top={"0px"} w={["100vw", null, null, "100%"]} h={["100vh", null, null, "fit-content"]} bg={navBgColor} pt={["80px", null, null, "5px"]}>
-            <DocsNavigationCategory title={"빠르게 시작하기"}>
-                <DocsNavigationH1 href={"/docs/getting-started#installation"} name={"냥랭 설치"}>
-                    <DocsNavigationH2 href={"/docs/getting-started#how-to-run"} name={"실행"} />
-                </DocsNavigationH1>
-                <DocsNavigationH1 href={"/docs/getting-started#keyword-table"} name={"키워드 미리보기"}>
-                    <DocsNavigationH2 href={"/docs/getting-started#explain-basic-keywords"} name={"기본 키워드 설명"}>
-                        <DocsNavigationH3 href={"/docs/getting-started#pointer-move-explained"}>포인터의 주소 변경</DocsNavigationH3>
-                        <DocsNavigationH3 href={"/docs/getting-started#pointer-value-change-explained"}>포인터의 값 변경</DocsNavigationH3>
+            <DocsNavigationCategory title={"냥랭 시작하기"}>
+                <DocsNavigationH1 href={"/docs/getting-started#installation"} name={"냥랭 설치"} />
+                <DocsNavigationH1 href={"/docs/getting-started#how-to-run"} name={"실행"} />
+            </DocsNavigationCategory>
+            <DocsNavigationCategory title={"기본 튜토리얼"}>
+                <DocsNavigationH1 href={"/docs/basic-tutorial#explain-basic-keywords"} name={"기본 키워드 설명"}>
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#pointer-move-explained"} name={"포인터의 주소 변경"} />
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#pointer-value-change-explained"} name={"포인터의 값 변경"} />
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#output-explained"} name={"출력과 디버깅"} />
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#input-explained"} name={"입력"} />
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#loop-explained"} name={"반복하기"}>
+                        <DocsNavigationH3 href={"/docs/basic-tutorial#loop-input"}>길이가 정해지지 않은 입력</DocsNavigationH3>
                     </DocsNavigationH2>
+                    <DocsNavigationH2 href={"/docs/basic-tutorial#comment"} name={"주석"} />
                 </DocsNavigationH1>
-                <DocsNavigationH1 href={"/docs/getting-started#hello-world"} name={"Hello World 예제"}>
-                    <DocsNavigationH2 href={"/docs/getting-started#hello-world-explained"} name={"예제 설명"} />
-                </DocsNavigationH1>
+                <DocsNavigationH1 href={"/docs/basic-tutorial#hello-world"} name={"Hello World 예제"} />
+            </DocsNavigationCategory>
+            <DocsNavigationCategory title={"키워드 테이블"}>
+                <DocsNavigationH1 href={"/docs/keyword-table#keyword-table"} name={"키워드 테이블"} />
             </DocsNavigationCategory>
         </Accordion>
     </>
