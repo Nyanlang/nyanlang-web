@@ -1,12 +1,8 @@
 import DocsTemplate from "@/components/docs-template";
 import {H1, H2, P, InCode, Bold, OutCode, MyTable} from "@/components/docs-component";
-import {NextSeo} from "next-seo";
 
 export default function DocsGettingStarted() {
-    return <DocsTemplate>
-        <NextSeo
-             title={"냥랭 시작하기"}
-        />
+    return <DocsTemplate title={"냥랭 시작하기"}>
         <H1 id={"installation"}>냥랭 설치</H1>
         <P>냥랭은 <Bold>pip</Bold>를 통해 간편하게 할 수 있다냥.</P>
         <P>쉘, CMD 혹은 Powershell에 다음과 같이 입력해서 바로 설치하면 된다냥.</P>
