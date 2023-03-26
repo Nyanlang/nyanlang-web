@@ -89,12 +89,34 @@ export default function Navigation() {
     )
 }
 
-function DocsNavigationItem(props: {href: string, lv: 1|2|3, children: React.ReactNode}) {
+function DocsNavigationH1(props: {href: string, name: string, children?: React.ReactNode}) {
     let router = useRouter();
 
     const navTextColor = useColorModeValue("black", "whiteAlpha.900");
 
-    return <Box w={"100%"} fontWeight={"thin"} py={"3px"} ml={`${(props.lv-1)*20}px`} >
+    return <Box w={"100%"} fontWeight={"extrabold"} py={"3px"}>
+        <Link href={props.href} color={router.route === props.href ? "nyanlang.700" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{props.name}</Link>
+        {props.children}
+    </Box>
+}
+
+function DocsNavigationH2(props: {href: string, name: string, children?: React.ReactNode}) {
+    let router = useRouter();
+
+    const navTextColor = useColorModeValue("black", "whiteAlpha.900");
+
+    return <Box w={"100%"} fontWeight={"medium"} py={"3px"} ml={"20px"}>
+        <Link href={props.href} color={router.route === props.href ? "nyanlang.700" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{props.name}</Link>
+        {props.children}
+    </Box>
+}
+
+function DocsNavigationH3(props: {href: string, children?: React.ReactNode}) {
+    let router = useRouter();
+
+    const navTextColor = useColorModeValue("black", "whiteAlpha.900");
+
+    return <Box w={"100%"} fontWeight={"hairline"} py={"3px"} ml={"40px"}>
         <Link href={props.href} color={router.route === props.href ? "nyanlang.700" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{props.children}</Link>
     </Box>
 }
@@ -124,11 +146,18 @@ export function DocsNavigation() {
         <IconButton aria-label={"메뉴"} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} size={"md"} display={["block", null, null, "none"]} position={"fixed"} top={"90px"} left={"10px"} onClick={() => setIsOpen((prev) => !prev)} zIndex={100} />
         <Accordion overflowY={"auto"} allowToggle display={[isOpen ? "block" : "none", null, null, "block"]} position={["relative", null, null, "sticky"]} top={"0px"} w={["100vw", null, null, "100%"]} h={["100vh", null, null, "fit-content"]} bg={navBgColor} pt={["80px", null, null, "5px"]}>
             <DocsNavigationCategory title={"빠르게 시작하기"}>
-                <DocsNavigationItem lv={1} href={"/docs/getting-started#installation"}>설치</DocsNavigationItem>
-                <DocsNavigationItem lv={2} href={"/docs/getting-started#how-to-run"}>실행</DocsNavigationItem>
-                <DocsNavigationItem lv={1} href={"/docs/getting-started#keyword-table"}>키워드 미리보기</DocsNavigationItem>
-                <DocsNavigationItem lv={1} href={"/docs/getting-started#hello-world"}>Hello World 예제</DocsNavigationItem>
-                <DocsNavigationItem lv={2} href={"/docs/getting-started#hello-world-explained"}>예제 설명</DocsNavigationItem>
+                <DocsNavigationH1 href={"/docs/getting-started#installation"} name={"냥랭 설치"}>
+                    <DocsNavigationH2 href={"/docs/getting-started#how-to-run"} name={"실행"} />
+                </DocsNavigationH1>
+                <DocsNavigationH1 href={"/docs/getting-started#keyword-table"} name={"키워드 미리보기"}>
+                    <DocsNavigationH2 href={"/docs/getting-started#explain-basic-keywords"} name={"기본 키워드 설명"}>
+                        <DocsNavigationH3 href={"/docs/getting-started#pointer-move-explained"}>포인터의 주소 변경</DocsNavigationH3>
+                        <DocsNavigationH3 href={"/docs/getting-started#pointer-value-change-explained"}>포인터의 값 변경</DocsNavigationH3>
+                    </DocsNavigationH2>
+                </DocsNavigationH1>
+                <DocsNavigationH1 href={"/docs/getting-started#hello-world"} name={"Hello World 예제"}>
+                    <DocsNavigationH2 href={"/docs/getting-started#hello-world-explained"} name={"예제 설명"} />
+                </DocsNavigationH1>
             </DocsNavigationCategory>
         </Accordion>
     </>
