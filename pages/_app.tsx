@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <DefaultSeo
         defaultTitle={"냥랭 - 귀여운 프로그래밍 언어"}
         description={"세상에서 가장 귀여운 프로그래밍 언어!"}
-        titleTemplate={"%s | 냥랭 문서"}
         themeColor={"#fcda05"}
         openGraph={{
           type: 'website',
