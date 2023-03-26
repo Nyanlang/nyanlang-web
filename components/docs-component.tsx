@@ -1,4 +1,19 @@
-import {Box, Heading, Link, Table, TableCaption, TableContainer, Text, Thead, Tr, Th, Tbody, Td, IconButton} from "@chakra-ui/react";
+import {
+    Box,
+    Heading,
+    Link,
+    Table,
+    TableCaption,
+    TableContainer,
+    Text,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
+    IconButton,
+    useColorModeValue
+} from "@chakra-ui/react";
 import {LinkIcon} from "@chakra-ui/icons";
 import {useRouter} from "next/router";
 
@@ -35,7 +50,10 @@ export function Lnk(props: { href: string, children: any }) {
 }
 
 export function InCode(props: { children: any }) {
-    return <Box as={"span"} rounded={"md"} bg={"black"} color={"white"} py={"2px"} px={"4px"} mx={"1px"}>{props.children}</Box>
+    const bg = useColorModeValue("gray.200", "gray.700");
+    const color = useColorModeValue("blackAlpha.900", "whiteAlpha.900");
+
+    return <Box as={"span"} rounded={"md"} bg={bg} color={color} py={"2px"} px={"4px"} mx={"1px"}>{props.children}</Box>
 }
 
 export function Bold(props: { children: any }) {
@@ -43,7 +61,10 @@ export function Bold(props: { children: any }) {
 }
 
 export function OutCode(props: { children: any }) {
-    return <Box rounded={"md"} bg={"black"} color={"white"} w={"100%"} p={"10px"} mx={"5px"} my={"10px"}>
+    const bg = useColorModeValue("gray.200", "gray.700");
+    const color = useColorModeValue("blackAlpha.900", "whiteAlpha.900");
+
+    return <Box rounded={"md"} bg={bg} color={color} w={"100%"} p={"10px"} mx={"5px"} my={"10px"}>
         {props.children}
     </Box>
 }
