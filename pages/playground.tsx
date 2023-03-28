@@ -1,6 +1,7 @@
 import {Alert, AlertIcon, Badge, Box, Button, Flex, Heading, Icon, Textarea, useToast} from "@chakra-ui/react";
 import {VscPlay, VscDebugPause} from "react-icons/vsc";
 import {useState} from "react";
+import {NextSeo} from "next-seo";
 
 export default function Playground() {
     let [code, setCode] = useState<string>("");
@@ -48,6 +49,9 @@ export default function Playground() {
     }
 
     return <Flex direction={"column"} pt={"160px"} mx={"auto"} w={"75%"} h={"100vh"}>
+        <NextSeo
+            title={"샌드박스 | 냥랭"}
+        />
         <Heading as={"h1"} fontSize={["3xl", null, "5xl"]} mb={"20px"}>샌드박스 <Badge colorScheme={"green"} ml={1} fontSize={"xl"}>BETA</Badge></Heading>
         <Flex gap={"20px"} direction={"column"} h={"100%"}>
             <Flex direction={"column"}>
