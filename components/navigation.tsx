@@ -25,13 +25,13 @@ function NavigationLink(prop: {href: string, children: React.ReactNode}) {
     const navTextColor = useColorModeValue("gray.800", "whiteAlpha.900");
 
     return (
-        <Link href={prop.href} fontSize={"lg"} fontWeight={"semibold"} mx={"10px"} color={router.route === prop.href ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
+        <Link href={prop.href} fontSize={["md", "lg"]} fontWeight={["black", "semibold"]} mx={[2, null, 4]} color={router.route === prop.href ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
     )
 }
 
 function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNode}) {
     return (
-        <Button onClick={() => prop.onClick()} bg={"transparent"} _hover={{bg:"transparent"}}>{prop.children}</Button>
+        <Button onClick={() => prop.onClick()} bg={"transparent"} _hover={{bg:"transparent"}} px={1}>{prop.children}</Button>
     )
 }
 
@@ -75,6 +75,7 @@ export default function Navigation() {
                     <NavigationLink href={"/"}>홈</NavigationLink>
                     <NavigationLink href={"/docs"}>문서</NavigationLink>
                     {/*<NavigationLink href={"/"}>예제</NavigationLink>*/}
+                    <NavigationLink href={"/playground"}>샌드박스</NavigationLink>
                 </Flex>
                 <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"}>
                     <NavigationExternalBtn onClick={() => router.push("https://github.com/nyanlang/nyanlang")}>
