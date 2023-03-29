@@ -19,7 +19,7 @@ export default function DocsTemplate(props: { title: string, children: any }) {
         <NextSeo
             title={props.title + " | 냥랭 문서"}
         />
-        <Grid w={"100vw"} h={"100vh"} pt={"80px"} gridTemplateColumns={"repeat(4, 1fr)"} gridTemplateRows={"1fr"}>
+        <Grid w={"100%"} h={"100vh"} pt={"80px"} gridTemplateColumns={"repeat(4, 1fr)"} gridTemplateRows={"1fr"}>
             <GridItem colSpan={1} h="100%" position={["fixed", null, null, "relative"]} top={["80px", null, null, "0"]} borderRight={["none", null, null, "1px solid black"]} zIndex={99}>
                 <Box position={["relative", null, null, "sticky"]} top={["0", null, null, "80px"]} overflowY={"auto"}>
                     <DocsNavigation />
