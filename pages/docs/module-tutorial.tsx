@@ -85,7 +85,7 @@ export default function DocsModuleTutorial() {
         </OutCode>
         <P>이 파일을 실행시키면, 맨 마지막의 <InCode>;</InCode> 키워드에 도달한 시점에 일반 메모리 주소 1에는 값 65가 저장된다냥.</P>
         <P>그리고 일반 포인터가 주소 1을 가리킨 상태로, <Bold>모듈에 쓰기</Bold>를 실행한다냥.</P>
-        <P>모듈 포인터는 <InCode>먕</InCode>과 <InCode>먀</InCode>, <InCode>'</InCode>가 실행되지 않은 상태이므로 <Bold>자식 모듈 메모리의 주소 0</Bold>을 가리키고 있을 것이다냥.</P>
+        <P>모듈 포인터는 <InCode>먕</InCode>과 <InCode>먀</InCode>, <InCode>&apos;</InCode>가 실행되지 않은 상태이므로 <Bold>자식 모듈 메모리의 주소 0</Bold>을 가리키고 있을 것이다냥.</P>
         <P>따라서 자식 메모리 0번에 있는 <InCode>example {"<->"} children1</InCode> 커뮤니케이터를 타고, <InCode>example-children1.nyan</InCode> 파일을 실행시킨다냥.</P>
         <P><InCode>example-children1.nyan</InCode> 파일이 다음과 같다고 해보자냥.</P>
         <OutCode>
