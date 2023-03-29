@@ -163,6 +163,18 @@ export function DocsNavigation() {
                 </DocsNavigationH1>
                 <DocsNavigationH1 href={"/docs/basic-tutorial#hello-world"} name={"Hello World 예제"} />
             </DocsNavigationCategory>
+            <DocsNavigationCategory title={"모듈 튜토리얼"}>
+                <DocsNavigationH1 href={"/docs/module-tutorial#explain-module"} name={"모듈에 대하여"}>
+                    <DocsNavigationH2 href={"/docs/module-tutorial#module-keywords"} name={"모듈 관련 키워드"} />
+                    <DocsNavigationH2 href={"/docs/module-tutorial#module-memory-explained"} name={"모듈의 새로운 메모리"} />
+                    <DocsNavigationH2 href={"/docs/module-tutorial#module-connect-explained"} name={"냥랭 파일간의 연결"} />
+                    <DocsNavigationH2 href={"/docs/module-tutorial#module-community-explained"} name={"냥랭 파일간의 소통"}>
+                        <DocsNavigationH3 href={"/docs/module-tutorial#module-memory-define"}>모듈 메모리 정의</DocsNavigationH3>
+                        <DocsNavigationH3 href={"/docs/module-tutorial#module-memory-control"}>모듈 메모리 조작</DocsNavigationH3>
+                        <DocsNavigationH3 href={"/docs/module-tutorial#module-memory-io"}>커뮤니케이션</DocsNavigationH3>
+                    </DocsNavigationH2>
+                </DocsNavigationH1>
+            </DocsNavigationCategory>
             <DocsNavigationCategory title={"키워드 테이블"}>
                 <DocsNavigationH1 href={"/docs/keyword-table#keyword-table"} name={"키워드 테이블"} />
             </DocsNavigationCategory>
