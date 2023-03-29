@@ -11,7 +11,7 @@ export default function Playground() {
     const toast = useToast();
 
     function runCode() {
-        const socket = new WebSocket("ws://" + process.env.NEXT_PUBLIC_API_URL + "/playground/run")
+        const socket = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_PROTOCOL + "://" + process.env.NEXT_PUBLIC_API_URL + "/playground/run")
 
         setSocket(socket);
 
