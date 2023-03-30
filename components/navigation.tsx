@@ -150,6 +150,9 @@ export function DocsNavigation() {
                 <DocsNavigationH1 href={"/docs/getting-started#installation"} name={"냥랭 설치"} />
                 <DocsNavigationH1 href={"/docs/getting-started#how-to-run"} name={"실행"} />
             </DocsNavigationCategory>
+            <DocsNavigationCategory title={"개발 환경 구축"}>
+                <DocsNavigationH1 href={"/docs/development-environment#ide"} name={"IDE"} />
+            </DocsNavigationCategory>
             <DocsNavigationCategory title={"기본 튜토리얼"}>
                 <DocsNavigationH1 href={"/docs/basic-tutorial#explain-basic-keywords"} name={"기본 키워드 설명"}>
                     <DocsNavigationH2 href={"/docs/basic-tutorial#pointer-move-explained"} name={"포인터의 주소 변경"} />
@@ -179,7 +182,7 @@ export function DocsNavigation() {
                 <DocsNavigationH1 href={"/docs/code-convention"} name={"코드 컨벤션"} />
             </DocsNavigationCategory>
             <DocsNavigationCategory title={"키워드 테이블"}>
-                <DocsNavigationH1 href={"/docs/keyword-table#keyword-table"} name={"키워드 테이블"} />
+                <DocsNavigationH1 href={"/docs/keyword-table"} name={"키워드 테이블"} />
             </DocsNavigationCategory>
         </Accordion>
     </>

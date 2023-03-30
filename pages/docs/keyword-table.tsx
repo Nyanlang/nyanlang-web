@@ -3,7 +3,7 @@ import {Bold, H1, MyTable, P} from "@/components/docs-component";
 
 export default function DocsBasicTutorial() {
     return <DocsTemplate title={"키워드 테이블"}>
-        <H1 id={"keyword-table"}>키워드 테이블</H1>
+        <H1>키워드 테이블</H1>
         <P>냥랭은 한 글자가 모두 하나의 행동을 나타낸다냥.<br/>그리고 냥랭에서는 그것들을 <Bold>키워드</Bold>라고 부른다냥.</P>
         <P>아래는 냥랭의 모든 키워드들이다냥.</P>
         <MyTable head={["키워드", "설명"]} body={
