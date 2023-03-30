@@ -175,6 +175,9 @@ export function DocsNavigation() {
                     </DocsNavigationH2>
                 </DocsNavigationH1>
             </DocsNavigationCategory>
+            <DocsNavigationCategory title={"코드 컨벤션"}>
+                <DocsNavigationH1 href={"/docs/code-convention"} name={"코드 컨벤션"} />
+            </DocsNavigationCategory>
             <DocsNavigationCategory title={"키워드 테이블"}>
                 <DocsNavigationH1 href={"/docs/keyword-table#keyword-table"} name={"키워드 테이블"} />
             </DocsNavigationCategory>
