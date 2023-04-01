@@ -10,7 +10,8 @@ import {
     Heading,
     Link,
     IconButton, useColorMode, useColorModeValue,
-    Icon
+    Icon, Badge,
+    Tooltip
 } from "@chakra-ui/react";
 import React from "react";
 import {useRouter} from "next/router";
@@ -25,13 +26,15 @@ function NavigationLink(prop: {href: string, children: React.ReactNode}) {
     const navTextColor = useColorModeValue("gray.800", "whiteAlpha.900");
 
     return (
-        <Link href={prop.href} fontSize={["md", "lg"]} fontWeight={["black", "semibold"]} mx={[2, null, 4]} color={router.route === prop.href ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
+        <Link href={prop.href} fontSize={["md", "lg"]} fontWeight={["black", "semibold"]} mx={[2, null, 4]} w={["100%", "initial"]} textAlign={["center", "initial"]} color={router.route === prop.href ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
     )
 }
 
-function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNode}) {
+function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNode, label: string}) {
     return (
-        <Button onClick={() => prop.onClick()} bg={"transparent"} _hover={{bg:"transparent"}} px={1}>{prop.children}</Button>
+        <Tooltip label={prop.label}>
+            <Button onClick={() => prop.onClick()} bg={"transparent"} _hover={{bg:"transparent"}} px={1}>{prop.children}</Button>
+        </Tooltip>
     )
 }
 
@@ -41,10 +44,12 @@ export default function Navigation() {
     const {colorMode, toggleColorMode} = useColorMode();
     const navBgColor = useColorModeValue("whiteAlpha.900", "gray.900");
 
+    let [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <Flex
             direction={"row"}
-            justify={"center"}
+            justify={"space-between"}
             align={"center"}
             h={"80px"}
             w={"100vw"}
@@ -52,13 +57,13 @@ export default function Navigation() {
             boxShadow={"md"}
             position={"fixed"}
             zIndex={100}
-            backdropBlur={"8px"}
+            backdropBlur={isMobileMenuOpen ? "0" : "8px"}
         >
             <Flex direction={"row"} justify={"space-between"} align={"center"} w={"90%"} maxW={"1000px"} h={"100%"} mx={"auto"}>
-                <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"}>
-                    <Box bg={"nyanlang.500"} mr={"10px"}>
+                <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"} gap={"5px"}>
+                    <Box bg={"nyanlang.500"} mr={"5px"}>
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                             width={"60px"} height={"60px"} viewBox="0 0 313.000000 313.000000"
+                             width={"40px"} height={"40px"} viewBox="0 0 313.000000 313.000000"
                              preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,313.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">
@@ -72,16 +77,21 @@ export default function Navigation() {
                             </g>
                         </svg>
                     </Box>
+                    <Heading as={"h4"} size={"md"} fontWeight={"black"}>냥랭</Heading>
+                    <Badge variant={"solid"}>v1.5.2</Badge>
+                </Flex>
+                <Flex direction={["column", "row"]} justify={"center"} align={"center"} h={["fit-content", "100%"]} w={["100%", "fit-content"]} display={[isMobileMenuOpen ? "flex" : "none", "flex"]} position={["fixed", "relative"]} top={["80px", "initial"]} left={["0px", "initial"]} bgColor={[navBgColor, "initial"]} backdropBlur={["8px", "initial"]} boxShadow={["md", "initial"]} py={["4", "0"]} rowGap={["3", "0"]}>
                     <NavigationLink href={"/"}>홈</NavigationLink>
                     <NavigationLink href={"/docs"}>문서</NavigationLink>
                     {/*<NavigationLink href={"/"}>예제</NavigationLink>*/}
-                    <NavigationLink href={"/playground"}>샌드박스</NavigationLink>
+                    <NavigationLink href={"/playground"}>놀이터</NavigationLink>
                 </Flex>
                 <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"}>
-                    <NavigationExternalBtn onClick={() => router.push("https://github.com/nyanlang/nyanlang")}>
+                    <IconButton aria-label={"메뉴"} bg={"transparent"} _hover={{bg:"transparent"}} display={["flex", "none"]} icon={<HamburgerIcon />} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+                    <NavigationExternalBtn onClick={() => router.push("https://github.com/nyanlang/nyanlang")} label={"깃허브 스타 한번만 눌러달라냥..."}>
                         <Icon as={AiFillGithub} w={6} h={6} />
                     </NavigationExternalBtn>
-                    <NavigationExternalBtn onClick={() => toggleColorMode()}>
+                    <NavigationExternalBtn onClick={() => toggleColorMode()} label={"테마를 껏다켯다!"}>
                         {colorMode === "light" ? <MoonIcon w={6} h={6} /> : <SunIcon w={6} h={6} />}
                     </NavigationExternalBtn>
                 </Flex>

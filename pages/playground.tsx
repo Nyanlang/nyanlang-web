@@ -2,6 +2,7 @@ import {Alert, AlertIcon, Badge, Box, Button, Flex, Heading, Icon, Textarea, use
 import {VscPlay, VscDebugPause} from "react-icons/vsc";
 import {useState} from "react";
 import {NextSeo} from "next-seo";
+import {BasicButton} from "@/components/button";
 
 export default function Playground() {
     let [code, setCode] = useState<string>("");
@@ -68,7 +69,7 @@ export default function Playground() {
             title={"샌드박스 | 냥랭"}
         />
         <Heading as={"h1"} fontSize={["3xl", null, "5xl"]} mb={"20px"}>샌드박스 <Badge colorScheme={"green"} ml={1} fontSize={"xl"}>BETA</Badge></Heading>
-        <Flex gap={"20px"} direction={"column"} h={"100%"}>
+        <Flex gap={"20px"} direction={"column"} h={"100%"} mb={"20px"}>
             <Flex direction={"column"}>
                 <Alert status={"info"} variant={"solid"} mb={1} wordBreak={"keep-all"}><AlertIcon />최대 5000번의 명령어를 수행하면 프로세스가 강제 종료된다냥.</Alert>
                 <Alert status={"warning"} variant={"solid"} wordBreak={"keep-all"}><AlertIcon />모듈 관련 기능과 입력은 현재 사용할 수 없다냥.</Alert>
@@ -84,13 +85,13 @@ export default function Playground() {
                 </Box>
             </Flex>
             <Flex direction={"row"} justify={"flex-end"} w={"100%"} h={"50px"} pb={"20px"}>
-                <Button colorScheme={"green"} onClick={RunHandle}>
+                <BasicButton onClick={RunHandle} bgColor={"green.300"} hoverBgColor={"green.500"}>
                     {
                         socket && (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING)
                             ? <>중지<Icon as={VscDebugPause} ml={"10px"} /></>
                             : <>실행<Icon as={VscPlay} ml={"10px"} /></>
                     }
-                </Button>
+                </BasicButton>
             </Flex>
         </Flex>
     </Flex>
