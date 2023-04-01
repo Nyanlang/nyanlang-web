@@ -20,7 +20,7 @@ import {AiFillGithub} from "react-icons/ai"
 import {useState} from "react";
 
 
-const version = "v1.4.4"
+const version = "v1.5.2"
 
 
 function NavigationLink(prop: {href: string, children: React.ReactNode}) {
