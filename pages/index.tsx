@@ -7,6 +7,7 @@ export default function Index() {
     return (<>
         <Flex direction={"column"} align={"center"} justify={"center"} h={"100vh"} gap={"20px"}>
             <Image src={"/images/footstep.png"}
+                   alt={""}
                    position={"fixed"}
                    top={"35vh"}
                    left={["10vw", null, "30vw"]}
@@ -15,6 +16,7 @@ export default function Index() {
                    transform={"rotateZ(-50deg)"}
                    zIndex={-1} />
             <Image src={"/images/footstep.png"}
+                   alt={""}
                    position={"fixed"}
                    top={"55vh"}
                    left={["85vw", null, "60vw"]}
@@ -22,14 +24,14 @@ export default function Index() {
                    h={["50px", null, "80px"]}
                    transform={"rotateZ(50deg)"}
                    zIndex={-1} />
-            <Image
-                src={"/images/nyaaaaaaan.png"}
-                position={"fixed"}
-                top={["25vh", "20vh"]}
-                left={"50vw"}
-                w={["200px", "300px"]}
-                h={"auto"}
-                zIndex={-1} />
+            <Image src={"/images/nyaaaaaaan.png"}
+                   alt={""}
+                   position={"fixed"}
+                   top={["25vh", "20vh"]}
+                   left={"50vw"}
+                   w={["200px", "300px"]}
+                   h={"auto"}
+                   zIndex={-1} />
             <Heading as={"h1"} fontSize={"4xl"} fontWeight={"black"}>냥랭!</Heading>
             <Heading as={"h2"} fontSize={"3xl"} fontWeight={"black"} color={subHeaderColor} wordBreak={"keep-all"} textAlign={"center"}>세상 제일의 귀여운 프로그래밍 언어다냥!</Heading>
             <Flex direction={["column", null, "row"]} align={"center"} justify={"center"} gap={"5px"}>
