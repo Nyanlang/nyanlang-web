@@ -164,7 +164,7 @@ export function DocsNavigation() {
                 <DocsNavigationH1 href={"/docs/getting-started#how-to-run"} name={"실행"} />
             </DocsNavigationCategory>
             <DocsNavigationCategory title={"개발 환경 구축"}>
-                <DocsNavigationH1 href={"/docs/development-environment#ide"} name={"IDE"} />
+                <DocsNavigationH1 href={"/docs/dev-environment#ide"} name={"IDE"} />
             </DocsNavigationCategory>
             <DocsNavigationCategory title={"기본 튜토리얼"}>
                 <DocsNavigationH1 href={"/docs/basic-tutorial#explain-basic-keywords"} name={"기본 키워드 설명"}>
