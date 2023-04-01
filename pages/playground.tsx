@@ -1,8 +1,140 @@
-import {Alert, AlertIcon, Badge, Box, Flex, Heading, Icon, Textarea, useToast, Text} from "@chakra-ui/react";
+import {
+    Alert,
+    AlertIcon,
+    Badge,
+    Box,
+    Flex,
+    Heading,
+    Icon,
+    useToast,
+    Text,
+    useColorModeValue, Textarea, Tooltip
+} from "@chakra-ui/react";
 import {VscPlay, VscDebugPause} from "react-icons/vsc";
-import {useState} from "react";
+import {MutableRefObject, useEffect, useRef, useState} from "react";
 import {NextSeo} from "next-seo";
 import {BasicButton} from "@/components/button";
+
+interface AnalyzedCodeBlock {
+    type: "stdio" | "calc" | "comment" | "comment_end" | "control" | "error" | "literal" | "loop",
+    value: string
+}
+
+function Code(props: {color?: string, bgColor?: string, children: React.ReactNode, label?: string}) {
+    return <Tooltip label={props.label}>
+        <Text display={"inline"} fontSize={"md"} color={props.color} bgColor={props.bgColor}>{props.children}</Text>
+    </Tooltip>
+}
+
+function CodeBlock(props: {code: string, setCode: Function}) {
+    let [analyzedCode, setAnalyzedCode] = useState<AnalyzedCodeBlock[]>([]);
+    let [codeBlockFocus, setCodeBlockFocus] = useState(false);
+    let codeBlockRef: MutableRefObject<HTMLTextAreaElement|null> = useRef(null);
+
+    const codeEditorBg = useColorModeValue("gray.100", "gray.700");
+    const codeEditorBorder = useColorModeValue("gray.200", "gray.600");
+
+    useEffect(() => {
+        if (codeBlockFocus) {
+            setAnalyzedCode([]);
+        } else {
+            setAnalyzedCode([]);
+            let codeChars = props.code.split("");
+            let inComment = false;
+            for (let i = 0; i < codeChars.length; i++) {
+                if ([" ", "\n"].includes(codeChars[i])) {
+                    setAnalyzedCode(prev => [...prev, {type: "literal", value: codeChars[i]}])
+                } else if (["냥", "냐"].includes(codeChars[i])) {
+                    if (inComment) {
+                        setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
+                    } else {
+                        setAnalyzedCode(prev => [...prev, {type: "calc", value: codeChars[i]}])
+                    }
+                } else if (["?", "!"].includes(codeChars[i])) {
+                    if (inComment) {
+                        setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
+                    } else {
+                        setAnalyzedCode(prev => [...prev, {type: "control", value: codeChars[i]}])
+                    }
+                } else if (codeChars[i] === ".") {
+                    if (inComment) {
+                        setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
+                    } else {
+                        setAnalyzedCode(prev => [...prev, {type: "stdio", value: codeChars[i]}])
+                    }
+                } else if (["~", "-"].includes(codeChars[i])) {
+                    if (inComment) {
+                        setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
+                    } else {
+                        setAnalyzedCode(prev => [...prev, {type: "loop", value: codeChars[i]}])
+                    }
+                } else if (codeChars[i] === "\"" && (!inComment)) {
+                    setAnalyzedCode(prev => [...prev, {type: "comment", value: codeChars[i]}])
+                    inComment = true;
+                } else if (codeChars[i] === "\"" && inComment) {
+                    setAnalyzedCode(prev => [...prev.slice(0, prev.length-1), {type: "comment", value: prev[prev.length-1].value+codeChars[i]}])
+                    inComment = false;
+                } else {
+                    if (inComment) {
+                        setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
+                    } else {
+                        setAnalyzedCode(prev => [...prev, {type: "error", value: codeChars[i]}])
+                    }
+                }
+            }
+        }
+    }, [codeBlockFocus])
+
+    useEffect(() => {
+        if (codeBlockFocus) {
+            codeBlockRef.current ? codeBlockRef.current.focus() : null;
+        }
+    }, [codeBlockFocus, codeBlockRef.current])
+
+    return <>
+        <Textarea w={["100%", null, "50%"]}
+                  h={["50%", null, "100%"]}
+                  borderWidth={"2px"}
+                  borderColor={codeEditorBorder}
+                  bgColor={codeEditorBg}
+                  display={codeBlockFocus ? "block" : "none"}
+                  onChange={() => {}}
+                  onInput={(e) => {props.setCode(e.currentTarget.value)}}
+                  value={props.code}
+                  onBlur={() => setCodeBlockFocus(false)}
+                  ref={codeBlockRef}>
+        </Textarea>
+        <Box w={["100%", null, "50%"]}
+             h={["50%", null, "100%"]}
+             borderColor={codeEditorBorder}
+             borderWidth={"2px"}
+             bgColor={codeEditorBg}
+             borderRadius={"lg"}
+             p={"10px"}
+             display={codeBlockFocus ? "none" : "block"}
+             onClick={() => {setCodeBlockFocus(true);}}>
+            {
+                analyzedCode.map((code, index) => {
+                    if (code.type === "literal") {
+                        return <Code key={index}>{code.value}</Code>
+                    } else if (code.type === "calc") {
+                        return <Code key={index} color={"purple.400"} label={"계산: 포인터가 가리키는 주소의 값을 1씩 증가 혹은 감소시킨다냥."}>{code.value}</Code>
+                    } else if (code.type === "control") {
+                        return <Code key={index} color={"green.400"} label={"조종: 포인터의 주소를 1씩 증가 혹은 감소시킨다냥."}>{code.value}</Code>
+                    } else if (code.type === "stdio") {
+                        return <Code key={index} color={"blue.400"} label={"입출력: 입력, 혹은 출력을 담당한다냥."}>{code.value}</Code>
+                    } else if (code.type === "loop") {
+                        return <Code key={index} color={"yellow.400"} label={"점프: 정해진 규칙에 따라 커서를 점프시킨다냥."}>{code.value}</Code>
+                    } else if (code.type === "comment") {
+                        return <Code key={index} color={"gray.600"} label={"주석: 프로그램에서 무시된다냥."}>{code.value}</Code>
+                    } else if (code.type === "error") {
+                        return <Code key={index} color={"red.600"} bgColor={"red.400"} label={"잘못된 문자다냥: "+code.value}>{code.value}</Code>
+                    }
+                })
+            }
+        </Box>
+    </>
+}
 
 export default function Playground() {
     let [code, setCode] = useState<string>("");
@@ -75,7 +207,7 @@ export default function Playground() {
                 <Alert status={"warning"} variant={"solid"} wordBreak={"keep-all"}><AlertIcon />모듈 관련 기능과 입력은 현재 사용할 수 없다냥.</Alert>
             </Flex>
             <Flex direction={["column", null, "row"]} h={"100%"} gap={"10px"}>
-                <Textarea placeholder={"여기에 코드를 입력하세요!"} resize={"none"} w={["100%", null, "50%"]} h={["50%", null, "100%"]} onInput={(e) => {setCode(e.currentTarget.value)}} spellCheck={false} value={code} />
+                <CodeBlock code={code} setCode={setCode} />
                 <Box bgColor={"black"} color={"whiteAlpha.800"} borderRadius={"xl"} w={["100%", null, "50%"]} h={["50%", null, "100%"]} overflowY={"auto"} p={2} fontSize={"lg"} fontFamily={"playcmd"}>
                     {
                         response.map((value, index) => {
