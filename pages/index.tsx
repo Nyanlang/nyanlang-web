@@ -1,4 +1,4 @@
-import {Flex, Heading, Image, Link, useColorModeValue} from "@chakra-ui/react";
+import {Flex, Heading, Image, useColorModeValue} from "@chakra-ui/react";
 import {LnkButton} from "@/components/button";
 
 export default function Index() {

@@ -1,4 +1,4 @@
-import {Alert, AlertIcon, Badge, Box, Button, Flex, Heading, Icon, Textarea, useToast, Text} from "@chakra-ui/react";
+import {Alert, AlertIcon, Badge, Box, Flex, Heading, Icon, Textarea, useToast, Text} from "@chakra-ui/react";
 import {VscPlay, VscDebugPause} from "react-icons/vsc";
 import {useState} from "react";
 import {NextSeo} from "next-seo";
