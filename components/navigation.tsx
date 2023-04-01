@@ -20,6 +20,9 @@ import {AiFillGithub} from "react-icons/ai"
 import {useState} from "react";
 
 
+const version = "v1.4.4"
+
+
 function NavigationLink(prop: {href: string, children: React.ReactNode}) {
     let router = useRouter();
 
@@ -78,7 +81,7 @@ export default function Navigation() {
                         </svg>
                     </Box>
                     <Heading as={"h4"} size={"md"} fontWeight={"black"}>냥랭</Heading>
-                    <Badge variant={"solid"}>v1.5.2</Badge>
+                    <Badge variant={"solid"}>{version}</Badge>
                 </Flex>
                 <Flex direction={["column", "row"]} justify={"center"} align={"center"} h={["fit-content", "100%"]} w={["100%", "fit-content"]} display={[isMobileMenuOpen ? "flex" : "none", "flex"]} position={["fixed", "relative"]} top={["80px", "initial"]} left={["0px", "initial"]} bgColor={[navBgColor, "initial"]} backdropBlur={["8px", "initial"]} boxShadow={["md", "initial"]} py={["4", "0"]} rowGap={["3", "0"]}>
                     <NavigationLink href={"/"}>홈</NavigationLink>
