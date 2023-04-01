@@ -75,7 +75,7 @@ export default function Playground() {
                 <Alert status={"warning"} variant={"solid"} wordBreak={"keep-all"}><AlertIcon />모듈 관련 기능과 입력은 현재 사용할 수 없다냥.</Alert>
             </Flex>
             <Flex direction={["column", null, "row"]} h={"100%"} gap={"10px"}>
-                <Textarea placeholder={"여기에 코드를 입력하세요!"} resize={"none"} w={["100%", null, "50%"]} h={["50%", null, "100%"]} onInput={(e) => {setCode(e.currentTarget.value)}} value={code} />
+                <Textarea placeholder={"여기에 코드를 입력하세요!"} resize={"none"} w={["100%", null, "50%"]} h={["50%", null, "100%"]} onInput={(e) => {setCode(e.currentTarget.value)}} spellCheck={false} value={code} />
                 <Box bgColor={"black"} color={"whiteAlpha.800"} borderRadius={"xl"} w={["100%", null, "50%"]} h={["50%", null, "100%"]} overflowY={"auto"} p={2} fontSize={"lg"} fontFamily={"playcmd"}>
                     {
                         response.map((value, index) => {
