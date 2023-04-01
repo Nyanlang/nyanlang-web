@@ -12,35 +12,51 @@ import {
     Tbody,
     Td,
     IconButton,
-    useColorModeValue
+    useColorModeValue,
+    Tooltip,
+    useToast
 } from "@chakra-ui/react";
 import {LinkIcon} from "@chakra-ui/icons";
 import {useRouter} from "next/router";
 
 const domain = "https://nyanlang.org"
 
-export function H1(props: { id?: string, children: any }) {
+function Heads(props: {as: "h1"|"h2"|"h3", id?: string, children: any}) {
+    const fontSize = props.as === "h1" ? "4xl" : props.as === "h2" ? "2xl" : "xl";
+    const pm = props.as === "h1" ? 3 : props.as === "h2" ? 2 : 1;
+
     let router = useRouter();
 
-    return <Heading id={props.id} as={"h1"} fontSize={"4xl"} borderBottom={"1px solid black"} pb={3} mb={3} mt={16} display={"flex"} flexDirection={"row"} alignItems={"center"}>
-        {props.children}<IconButton aria-label={"Copy link"} icon={<LinkIcon />} size={"md"} variant={"ghost"} onClick={async () => {await navigator.clipboard.writeText(domain+router.route+"#"+props.id)}} zIndex={2} />
+    let toaster = useToast();
+
+    return <Heading id={props.id} as={props.as} fontSize={fontSize} borderBottom={"1px solid black"} pb={pm} mb={pm} mt={16} display={"flex"} flexDirection={"row"} alignItems={"center"}>
+        {props.children}
+        {
+            props.id
+                ? <Tooltip label={"누르면 링크가 복사된다냥!"}>
+                    <IconButton aria-label={"Copy link"} icon={<LinkIcon />} size={"md"} variant={"ghost"} onClick={async () => {await navigator.clipboard.writeText(domain+router.route+"#"+props.id);toaster({title: "복사됐다냥!", description:"어디서든 붙여넣기로 이 부분을 남들과 공유할 수 있다냥.", status: "success", duration: 3000, isClosable: true, variant: "left-accent", position: "bottom"})}} zIndex={2} />
+                </Tooltip>
+                : null
+        }
     </Heading>
+}
+
+export function H1(props: { id?: string, children: any }) {
+    return <Heads id={props.id} as={"h1"}>
+        {props.children}
+    </Heads>
 }
 
 export function H2(props: { id?: string, children: any }) {
-    let router = useRouter();
-
-    return <Heading id={props.id} as={"h2"} fontSize={"2xl"} borderBottom={"1px solid black"} pb={2.5} mb={2.5} mt={16} display={"flex"} flexDirection={"row"} alignItems={"center"}>
-        {props.children}<IconButton aria-label={"Copy link"} icon={<LinkIcon />} size={"md"} variant={"ghost"} onClick={async () => {await navigator.clipboard.writeText(domain+router.route+"#"+props.id)}} zIndex={2} />
-    </Heading>
+    return <Heads id={props.id} as={"h2"}>
+        {props.children}
+    </Heads>
 }
 
 export function H3(props: { id?: string, children: any }) {
-    let router = useRouter();
-
-    return <Heading id={props.id} as={"h3"} fontSize={"xl"} borderBottom={"1px solid black"} pb={1} mb={1} mt={16} display={"flex"} flexDirection={"row"} alignItems={"center"}>
-        {props.children}<IconButton aria-label={"Copy link"} icon={<LinkIcon />} size={"sm"} variant={"ghost"} onClick={async () => {await navigator.clipboard.writeText(domain+router.route+"#"+props.id)}} zIndex={2} />
-    </Heading>
+    return <Heads id={props.id} as={"h3"}>
+        {props.children}
+    </Heads>
 }
 
 export function P(props: { children: any }) {
