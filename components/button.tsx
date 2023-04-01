@@ -1,4 +1,4 @@
-import {Button, Link, useColorModeValue} from "@chakra-ui/react";
+import {Button, Link} from "@chakra-ui/react";
 
 export function BasicButton(props: {children: React.ReactNode, onClick: Function, bgColor?: string, hoverBgColor?: string}) {
     return <Button
