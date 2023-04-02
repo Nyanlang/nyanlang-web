@@ -11,7 +11,7 @@ import {
     useColorModeValue, Textarea, Tooltip
 } from "@chakra-ui/react";
 import {VscPlay, VscDebugPause} from "react-icons/vsc";
-import {MutableRefObject, useEffect, useRef, useState} from "react";
+import React, {MutableRefObject, useEffect, useRef, useState} from "react";
 import {NextSeo} from "next-seo";
 import {BasicButton} from "@/components/button";
 
@@ -56,7 +56,7 @@ function CodeBlock(props: {code: string, setCode: Function}) {
                     } else {
                         setAnalyzedCode(prev => [...prev, {type: "control", value: codeChars[i]}])
                     }
-                } else if (codeChars[i] === ".") {
+                } else if ([".", "뀨"].includes(codeChars[i])) {
                     if (inComment) {
                         setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {type: "comment", value: prev[prev.length - 1].value + codeChars[i]}])
                     } else {
@@ -99,7 +99,7 @@ function CodeBlock(props: {code: string, setCode: Function}) {
                   bgColor={codeEditorBg}
                   display={codeBlockFocus ? "block" : "none"}
                   onChange={() => {}}
-                  onInput={(e) => {props.setCode(e.currentTarget.value)}}
+                  onInput={(e) => {props.setCode(e.currentTarget.value.replace(/[“”]/g, "\""))}}
                   value={props.code}
                   onBlur={() => setCodeBlockFocus(false)}
                   ref={codeBlockRef}>
