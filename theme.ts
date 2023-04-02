@@ -30,6 +30,11 @@ const styles = {
         },
         "html": {
             scrollBehavior: "smooth"
+        },
+        "@supports (height: 100svh)": {
+            "html": {
+                height: "100svh"
+            }
         }
     }
 }
