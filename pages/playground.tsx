@@ -270,8 +270,8 @@ export default function Playground() {
         <Heading as={"h1"} fontSize={["3xl", null, "5xl"]} mb={"20px"}>샌드박스 <Badge colorScheme={"green"} ml={1} fontSize={"xl"}>BETA</Badge></Heading>
         <Flex gap={"20px"} direction={"column"} h={"100%"} mb={"20px"}>
             <Flex direction={"column"}>
-                <Alert status={"info"} variant={"solid"} mb={1} wordBreak={"keep-all"}><AlertIcon />최대 5000번의 명령어를 수행하면 프로세스가 강제 종료된다냥.</Alert>
-                <Alert status={"warning"} variant={"solid"} wordBreak={"keep-all"}><AlertIcon />모듈 관련 기능과 입력은 현재 사용할 수 없다냥.</Alert>
+                <Alert status={"info"} variant={"solid"} mb={1} wordBreak={"keep-all"} fontSize={["sm", null, "md"]} p={[2, null, 4]}><AlertIcon />최대 5000번의 명령어를 수행하면 프로세스가 강제 종료된다냥.</Alert>
+                <Alert status={"warning"} variant={"solid"} wordBreak={"keep-all"} fontSize={["sm", null, "md"]} p={[2, null, 4]}><AlertIcon />모듈 관련 기능과 입력은 현재 사용할 수 없다냥.</Alert>
             </Flex>
             <Tabs h={"100%"} variant={"unstyled"}>
                 <TabList color={nyanColor} borderBottom={"2px solid"} borderBottomColor={"gray.500"}>
