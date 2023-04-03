@@ -308,7 +308,6 @@ export default function Playground() {
                                     <MenuDivider />
                                     <MenuOptionGroup defaultValue={"nyanlang"} title={"To"} type={"radio"}>
                                         <TranslateMenuButton langString={"Nyanlang"} fromTo={translateFromTo} setFromTo={setTranslateFromTo} from={false} />
-                                        <TranslateMenuButton langString={"Test"} fromTo={translateFromTo} setFromTo={setTranslateFromTo} from={false} />
                                     </MenuOptionGroup>
                                 </MenuList>
                             </Menu>
