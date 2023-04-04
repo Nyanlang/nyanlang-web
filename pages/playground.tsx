@@ -66,7 +66,7 @@ function AnalyzedCodeBlock(props: {code: string, onClick?: Function, display?: s
                 } else {
                     setAnalyzedCode(prev => [...prev, {type: "control", value: codeChars[i]}])
                 }
-            } else if ([".", "뀨"].includes(codeChars[i])) {
+            } else if ([".", "뀨", ","].includes(codeChars[i])) {
                 if (inComment) {
                     setAnalyzedCode(prev => [...prev.slice(0, prev.length - 1), {
                         type: "comment",
