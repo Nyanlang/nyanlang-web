@@ -204,22 +204,28 @@ export default function Playground() {
     let [response, setResponse] = useState<Array<string>>([""]);
     let [translateResponse, setTranslateResponse] = useState("");
     let [socket, setSocket] = useState<WebSocket|undefined>(undefined);
+    let [mode, setMode] = useState<string>("run");
 
     const toast = useToast();
 
     function runCode() {
-        const socket = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_PROTOCOL + "://" + process.env.NEXT_PUBLIC_API_URL + "/playground/run")
+        const socket = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_PROTOCOL + "://" + process.env.NEXT_PUBLIC_API_URL + "/playground/" + mode);
 
         setSocket(socket);
 
         socket.addEventListener("message", (e) => {
             const data = JSON.parse(e.data)
             if (data.type === "message") {
-                if (data.value === "\n") {
-                    setResponse(prev => [...prev, ""]);
-                } else {
-                    setResponse(prev => [...prev.slice(0, prev.length - 1), prev[prev.length - 1] + data.value]);
+                if (mode === "run") {
+                    if (data.value === "\n") {
+                        setResponse(prev => [...prev, ""]);
+                    } else {
+                        setResponse(prev => [...prev.slice(0, prev.length - 1), prev[prev.length - 1] + data.value]);
+                    }
+                } else if (mode === "translate") {
+                    setTranslateResponse(data.value);
                 }
+
             } else if (data.type === "error") {
                 toast({
                     title: data.title,
@@ -232,7 +238,11 @@ export default function Playground() {
         });
 
         socket.addEventListener("open", () => {
-            socket.send(code);
+            if (mode === "run") {
+                socket.send(code);
+            } else if (mode === "translate") {
+                socket.send(translateCode);
+            }
         });
 
         socket.addEventListener("close", () => {
@@ -275,8 +285,8 @@ export default function Playground() {
             </Flex>
             <Tabs h={"100%"} variant={"unstyled"}>
                 <TabList color={nyanColor} borderBottom={"2px solid"} borderBottomColor={"gray.500"}>
-                    <Tab>실행</Tab>
-                    <Tab>번역</Tab>
+                    <Tab onClick={() => {setMode("run")}}>실행</Tab>
+                    <Tab onClick={() => {setMode("translate")}}>번역</Tab>
                 </TabList>
                 <TabIndicator
                     mt="-1.5px"
