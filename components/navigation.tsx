@@ -13,14 +13,11 @@ import {
     Icon, Badge,
     Tooltip
 } from "@chakra-ui/react";
-import React from "react";
+import React, {useEffect} from "react";
 import {useRouter} from "next/router";
 import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {AiFillGithub} from "react-icons/ai"
 import {useState} from "react";
-
-
-const version = "v1.5.2"
 
 
 function NavigationLink(prop: {href: string, children: React.ReactNode}) {
@@ -41,13 +38,20 @@ function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNo
     )
 }
 
-export default function Navigation() {
+export default function Navigation(props: {version: string}) {
     let router = useRouter();
 
     const {colorMode, toggleColorMode} = useColorMode();
     const navBgColor = useColorModeValue("whiteAlpha.900", "gray.900");
 
     let [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    let [version, setVersion] = useState("");
+    useEffect(() => {
+        fetch("/api/v2/version").then(res => res.json()).then(data => {
+            setVersion(data.version)
+        });
+    }, [])
 
     return (
         <Flex
