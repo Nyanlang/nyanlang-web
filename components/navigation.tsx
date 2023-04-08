@@ -38,7 +38,7 @@ function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNo
     )
 }
 
-export default function Navigation(props: {version: string}) {
+export default function Navigation() {
     let router = useRouter();
 
     const {colorMode, toggleColorMode} = useColorMode();
