@@ -20,13 +20,13 @@ import {AiFillGithub} from "react-icons/ai"
 import {useState} from "react";
 
 
-function NavigationLink(prop: {href: string, children: React.ReactNode}) {
+function NavigationLink(prop: {href: string, children: React.ReactNode, exactHref?: boolean}) {
     let router = useRouter();
 
     const navTextColor = useColorModeValue("gray.800", "whiteAlpha.900");
 
     return (
-        <Link href={prop.href} fontSize={["md", "lg"]} fontWeight={["black", "semibold"]} mx={[2, null, 4]} w={["100%", "initial"]} textAlign={["center", "initial"]} color={router.route === prop.href ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
+        <Link href={prop.href} fontSize={["md", "lg"]} fontWeight={["black", "semibold"]} mx={[2, null, 4]} w={["100%", "initial"]} textAlign={["center", "initial"]} color={prop.exactHref ? router.route === prop.href ? "nyanlang.600" : navTextColor : router.route.includes(prop.href) ? "nyanlang.600" : navTextColor} _hover={{textDecoration:"none",color:"nyanlang.500"}}>{prop.children}</Link>
     )
 }
 
@@ -48,7 +48,7 @@ export default function Navigation() {
 
     let [version, setVersion] = useState("");
     useEffect(() => {
-        fetch("/api/v2/version").then(res => res.json()).then(data => {
+        fetch("/api/v2/version").then(res => res.json()).then(data => { // TODO: making a fail handler with toast
             setVersion(data.version)
         });
     }, [])
@@ -88,10 +88,10 @@ export default function Navigation() {
                     <Badge variant={"solid"}>{version}</Badge>
                 </Flex>
                 <Flex direction={["column", "row"]} justify={"center"} align={"center"} h={["fit-content", "100%"]} w={["100%", "fit-content"]} display={[isMobileMenuOpen ? "flex" : "none", "flex"]} position={["fixed", "relative"]} top={["80px", "initial"]} left={["0px", "initial"]} bgColor={[navBgColor, "initial"]} backdropBlur={["8px", "initial"]} boxShadow={["md", "initial"]} py={["4", "0"]} rowGap={["3", "0"]}>
-                    <NavigationLink href={"/"}>홈</NavigationLink>
+                    <NavigationLink href={"/"} exactHref>홈</NavigationLink>
                     <NavigationLink href={"/docs"}>문서</NavigationLink>
-                    {/*<NavigationLink href={"/"}>예제</NavigationLink>*/}
                     <NavigationLink href={"/playground"}>놀이터</NavigationLink>
+                    <NavigationLink href={"/blog"}>블로그</NavigationLink>
                 </Flex>
                 <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"}>
                     <IconButton aria-label={"메뉴"} bg={"transparent"} _hover={{bg:"transparent"}} display={["flex", "none"]} icon={<HamburgerIcon />} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
