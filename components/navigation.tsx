@@ -1,17 +1,18 @@
 import {
-    Accordion,
-    AccordionItem,
-    AccordionPanel,
-    AccordionButton,
-    AccordionIcon,
-    Box,
-    Button,
-    Flex,
-    Heading,
-    Link,
-    IconButton, useColorMode, useColorModeValue,
-    Icon, Badge,
-    Tooltip
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionButton,
+  AccordionIcon,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Link,
+  IconButton, useColorMode, useColorModeValue,
+  Icon, Badge,
+  Tooltip,
+  useToast
 } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import {useRouter} from "next/router";
@@ -39,6 +40,8 @@ function NavigationExternalBtn(prop: {onClick: Function, children: React.ReactNo
 }
 
 export default function Navigation() {
+    let toast = useToast();
+
     let router = useRouter();
 
     const {colorMode, toggleColorMode} = useColorMode();
@@ -48,8 +51,22 @@ export default function Navigation() {
 
     let [version, setVersion] = useState("");
     useEffect(() => {
-        fetch("/api/v2/version").then(res => res.json()).then(data => { // TODO: making a fail handler with toast
+        fetch("/api/v2/version").then(res => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error("Failed to fetch version");
+            }
+        }).then(data => {
             setVersion(data.version)
+        }).catch(err => {
+          toast({
+            title: `Error: ${err}`,
+            description: "Failed to fetch version",
+            status: "warning",
+            duration: 5000,
+            isClosable: true,
+          })
         });
     }, [])
 
