@@ -20,6 +20,8 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import ReactPaginate from "react-paginate";
 import {MdUpdate, MdPublish} from "react-icons/md";
+import { formatDate } from "@/utils";
+import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 
 type blogPostTagsAttributes = {
   name: string,
@@ -60,8 +62,8 @@ const Pagenation = chakra(ReactPaginate)
 
 function PostItem(props: blogPost & {category: string}) {
   let router = useRouter();
-
-  return <Card bgColor={"transparent"} borderRadius={"0px"} borderBottom={"1px solid"} borderTop={"1px solid"} onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
+  // @ts-ignore because of VSCode bug
+  return <Card bgColor={"nyanlang.300"} borderRadius="25px" margin="30px" onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
     <CardHeader display={"flex"} flexDirection={"row"} gap={1} w={"100%"} alignItems={"center"} justifyContent={"center"}>
       {
         props.attributes.post_tags.data.map((tag, index) => (
@@ -73,8 +75,8 @@ function PostItem(props: blogPost & {category: string}) {
       <Heading>{props.attributes.title}</Heading>
     </CardBody>
     <CardFooter flexDirection={"column"}>
-      <Tooltip label={"Published Date"}><Text w={"100%"}><Icon as={MdPublish} />{new Date(props.attributes.publishedAt).toLocaleString()}</Text></Tooltip>
-      <Tooltip label={"Updated Date"}><Text w={"100%"}><Icon as={MdUpdate} />{new Date(props.attributes.updatedAt).toLocaleString()}</Text></Tooltip>
+      <Tooltip label={"Published Date"}><Text display="flex" marginRight="auto" fontWeight={"bold"} alignItems="center"><Icon as={MdPublish} />{formatDate(new Date(props.attributes.publishedAt))}</Text></Tooltip>
+      <Tooltip label={"Updated Date"}><Text marginRight="auto" display="flex" fontWeight={"bold"} alignItems="center"><Icon as={MdUpdate} />{formatDate(new Date(props.attributes.updatedAt))}</Text></Tooltip>
     </CardFooter>
   </Card>
 }
@@ -121,18 +123,20 @@ export default function BlogIndex() {
         <TabPanel>
           {
             posts ? (
-              posts.map((post, index) => {
-                return <PostItem {...post} category={"posts"} key={index} />
-              })
+              posts.length === 0 ?
+                <Text>No posts</Text> :posts.map((post, index) => {
+                  return <PostItem {...post} category={"posts"} key={index} />
+                })
             ) : <Spinner color={"nyanlang.500"} />
           }
         </TabPanel>
         <TabPanel>
           {
             posts ? (
-              posts.map((post, index) => {
-                return <PostItem {...post} category={"c-nyan-posts"} key={index} />
-              })
+              posts.length === 0 ?
+                <Text>No posts</Text> :posts.map((post, index) => {
+                  return <PostItem {...post} category={"posts"} key={index} />
+                })
             ) : <Spinner color={"nyanlang.500"} />
           }
         </TabPanel>
@@ -144,8 +148,8 @@ export default function BlogIndex() {
           pageCount={meta.pagination.pageCount}
           initialPage={1}
           breakLabel={"..."}
-          nextLabel={">"}
-          previousLabel={"<"}
+          nextLabel={<ChevronRightIcon />}
+          previousLabel={<ChevronLeftIcon />}
           onPageChange={() => {}}
           pageRangeDisplayed={5}
           renderOnZeroPageCount={null}
