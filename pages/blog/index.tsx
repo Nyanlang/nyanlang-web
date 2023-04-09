@@ -14,7 +14,8 @@ import {
   CardFooter, Text,
   Spinner, Badge,
   Tooltip,
-  Icon
+  Icon,
+  useColorModeValue
 } from "@chakra-ui/react";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
@@ -61,9 +62,10 @@ interface blogMeta {
 const Pagenation = chakra(ReactPaginate)
 
 function PostItem(props: blogPost & {category: string}) {
-  let router = useRouter();
+  const router = useRouter();
+  const cardBgColor = useColorModeValue("gray.100", "gray.700");
   // @ts-ignore because of VSCode bug
-  return <Card bgColor={"nyanlang.300"} borderRadius="25px" margin="30px" onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
+  return <Card bgColor={cardBgColor} borderRadius="25px" margin="30px" onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
     <CardHeader display={"flex"} flexDirection={"row"} gap={1} w={"100%"} alignItems={"center"} justifyContent={"center"}>
       {
         props.attributes.post_tags.data.map((tag, index) => (
