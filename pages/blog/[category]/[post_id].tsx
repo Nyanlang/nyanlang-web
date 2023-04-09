@@ -14,11 +14,9 @@ import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCation,
     TableContainer
 } from "@chakra-ui/react";
 import {Lnk} from "@/components/docs-component";
