@@ -24,8 +24,10 @@ import {Lnk} from "@/components/docs-component";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {MdPublish, MdUpdate} from "react-icons/md";
+import {ChevronLeftIcon} from "@chakra-ui/icons";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { formatDate } from "@/utils";
 
 
 const Blockquote = chakra("blockquote");
@@ -75,17 +77,18 @@ export default function BlogPostView() {
                 console.error(err);
             })
     }, [router.query.category, router.query.post_id])
-
+    
+    // @ts-ignore because of VSCode bug
     return <Flex direction={"column"} h={"100vh"} gap={"20px"} position={"relative"} pt={"100px"}>
         <Box w={["90%", "80%", "70%", "50%"]} mx={"auto"} h={"100%"}>
-            <Link href={"/blog"} ml={5} color={"gray.500"} fontSize={"lg"} fontWeight={"bold"}>{`<`} 글 목록</Link>
+            <Link href={"/blog"} ml={5} color={"gray.500"} fontSize={"lg"} fontWeight={"bold"} display="flex" alignItems="center"><ChevronLeftIcon /> 글 목록</Link>
             {
                 blogPost ? (
                     <>
                         <Box w={"100%"} p={5} my={10} borderBottom={"1px solid"}>
                             <Heading>{blogPost.attributes.title}</Heading>
-                            <Tooltip label={"Published Date"}><Text w={"fit-content"}><Icon as={MdPublish} />{new Date(blogPost.attributes.publishedAt).toLocaleString()}</Text></Tooltip>
-                            <Tooltip label={"Updated Date"}><Text w={"fit-content"}><Icon as={MdUpdate} />{new Date(blogPost.attributes.updatedAt).toLocaleString()}</Text></Tooltip>
+                            <Tooltip label={"Published Date"}><Text w={"fit-content"} display="flex" alignItems="center" fontWeight={"bold"}><Icon as={MdPublish}/>{formatDate(new Date(blogPost.attributes.publishedAt))}</Text></Tooltip>
+                            <Tooltip label={"Updated Date"}><Text w={"fit-content"} display="flex" alignItems="center" fontWeight={"bold"}><Icon as={MdUpdate}/>{formatDate(new Date(blogPost.attributes.updatedAt))}</Text></Tooltip>
                         </Box>
                         <Box w={"100%"} p={5} my={10}>
                             <ReactMarkdown
