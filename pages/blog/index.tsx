@@ -63,7 +63,7 @@ const Pagenation = chakra(ReactPaginate)
 function PostItem(props: blogPost & {category: string}) {
   let router = useRouter();
   // @ts-ignore because of VSCode bug
-  return <Card bgColor={"nyanlang.300"} borderRadius="25px" margin="30px" onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
+  return <Card bgColor={"nyanlang.500"} borderRadius="25px" margin="30px" onClick={() => router.push(`/blog/${props.category}/${props.id}`)} cursor={"pointer"}>
     <CardHeader display={"flex"} flexDirection={"row"} gap={1} w={"100%"} alignItems={"center"} justifyContent={"center"}>
       {
         props.attributes.post_tags.data.map((tag, index) => (
