@@ -49,6 +49,7 @@ export default function BlogPostView() {
     let toast = useToast();
 
     useEffect(() => {
+        if (!router.query.category || !router.query.post_id) return;
         fetch(`/api/v2/blog/${router.query.category}/${router.query.post_id}`)
             .then(res => {
                 if (res.ok) {
