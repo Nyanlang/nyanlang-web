@@ -17,7 +17,8 @@ import {
     Tr,
     Th,
     Td,
-    TableContainer
+    TableContainer,
+    chakra,
 } from "@chakra-ui/react";
 import {Lnk} from "@/components/docs-component";
 import {useEffect, useState} from "react";
@@ -25,6 +26,9 @@ import {useRouter} from "next/router";
 import {MdPublish, MdUpdate} from "react-icons/md";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+
+
+const Blockquote = chakra("blockquote");
 
 
 type blogPostView = {
@@ -94,11 +98,11 @@ export default function BlogPostView() {
                                     h5: ({node, ...props}) => <Heading as={"h5"} fontSize={"xl"} my={2} {...props}/>,
                                     h6: ({node, ...props}) => <Heading as={"h6"} fontSize={"lg"} my={2} {...props}/>,
                                     p: ({node, ...props}) => <Text as={"p"} {...props}/>,
-                                    a: ({node, ...props}) => <Lnk {...props}/>,
+                                    a: ({node, ...props}) => <Lnk href={props.href ? props.href : "/"}>{props.title}</Lnk>,
                                     ul: ({node, ...props}) => <UnorderedList as={"ul"} {...props}/>,
                                     ol: ({node, ...props}) => <OrderedList as={"ol"} {...props}/>,
                                     li: ({node, ...props}) => <ListItem as={"li"} {...props}/>,
-                                    blockquote: ({node, ...props}) => <Text as={"blockquote"} pl={3} py={2} my={4} borderLeft={"4px solid"} {...props}/>,
+                                    blockquote: ({node, ...props}) => <Blockquote pl={3} py={2} my={4} borderLeft={"4px solid"} {...props}/>,
                                     table: ({node, ...props}) => <TableContainer my={8}><Table {...props}/></TableContainer>,
                                     thead: ({node, ...props}) => <Thead {...props}/>,
                                     tbody: ({node, ...props}) => <Tbody {...props}/>,
