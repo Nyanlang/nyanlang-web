@@ -109,11 +109,8 @@ export default function BlogPostView() {
                                     tr: ({node, ...props}) => <Tr {...props}/>,
                                     th: ({node, ...props}) => <Th {...props}/>,
                                     td: ({node, ...props}) => <Td {...props}/>,
-                                    pre: ({node, ...props}) => <Text as={"pre"} {...props}/>,
-                                    code: ({node, ...props}) => <Text as={"code"} {...props}/>,
                                     em: ({node, ...props}) => <Text as={"em"} {...props}/>,
                                     strong: ({node, ...props}) => <Text as={"strong"} {...props}/>,
-                                    del: ({node, ...props}) => <Text as={"del"} fontStyle={"strikethrough"} {...props}/>,
                                     hr: ({node, ...props}) => <Text my={10} as={"hr"} {...props}/>,
                                     img: ({node, ...props}) => <Flex w={"100%"} h={"fit-content"} align={"center"} justify={"center"}><Text as={"img"} my={10} maxW={"60%"} {...props}/></Flex>,
                                 }}
