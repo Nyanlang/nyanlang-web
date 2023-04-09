@@ -1,24 +1,20 @@
 import {NextApiRequest, NextApiResponse} from "next";
-
-interface blogPost {
-  id: string,
-  attributes: {
-    title: string,
-    content: string,
-    createdAt: string,
-    updatedAt: string,
-    publishedAt: string,
-  }
-}
+import StrapiQueryGenerator from "@/utils";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { api_id, page },
   } = req
 
-  console.log(api_id, page);
+  let query = new StrapiQueryGenerator(`https://cms.nyanlang.org/api/${api_id}`)
+      .populate("post_tags", ["0"])
+      .sortBy("publishedAt", "desc")
+      .sortBy("title")
+      .filter_fields(["title", "createdAt", "updatedAt", "publishedAt", "post_tags"])
+      .paginate(page ? parseInt(typeof page === "string" ? page : page[0]) : 1, 10)
+      .toString();
 
-  const response = await fetch(`https://cms.nyanlang.org/api/${api_id}?sort[0]=publishedAt%3Adesc&sort[1]=title%3Aasc&pagination[page]=${page ? page : 1}&pagination[pageSize]=10`, {
+  const response = await fetch(query, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
