@@ -49,7 +49,8 @@ export default function Navigation() {
 
     let [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    let [version, setVersion] = useState("");
+    let [version, setVersion] = useState("1.7.0");
+    /*
     useEffect(() => {
         fetch("/api/v2/version").then(res => {
             if (res.ok) {
@@ -69,6 +70,7 @@ export default function Navigation() {
           })
         });
     }, [])
+    */
 
     return (
         <Flex
@@ -108,7 +110,7 @@ export default function Navigation() {
                     <NavigationLink href={"/"} exactHref>홈</NavigationLink>
                     <NavigationLink href={"/docs"}>문서</NavigationLink>
                     <NavigationLink href={"/playground"}>놀이터</NavigationLink>
-                    <NavigationLink href={"/blog"}>블로그</NavigationLink>
+                    {/*<NavigationLink href={"/blog"}>블로그</NavigationLink>*/}
                 </Flex>
                 <Flex direction={"row"} justify={"center"} align={"center"} h={"100%"}>
                     <IconButton aria-label={"메뉴"} bg={"transparent"} _hover={{bg:"transparent"}} display={["flex", "none"]} icon={<HamburgerIcon />} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
