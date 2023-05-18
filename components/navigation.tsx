@@ -49,8 +49,8 @@ export default function Navigation() {
 
     let [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    let [version, setVersion] = useState("1.7.0");
-    /*
+    let [version, setVersion] = useState("  ");
+
     useEffect(() => {
         fetch("/api/v2/version").then(res => {
             if (res.ok) {
@@ -69,8 +69,7 @@ export default function Navigation() {
             isClosable: true,
           })
         });
-    }, [])
-    */
+    }, []);
 
     return (
         <Flex
