@@ -4,7 +4,7 @@ import {H1, P, Lnk} from "@/components/docs-component";
 export default function DocsIndex() {
     return <DocsTemplate title={"메인"}>
         <H1>냥랭에 대하여...</H1>
-        <P>냥랭은 <Lnk href={"https://github.com/sserve-kr"}>서브</Lnk>에 의해서 2023년 2월 25일 만들어졌다냥.</P>
+        <P>냥랭은 <Lnk href={"https://github.com/ritonis"}>서브</Lnk>에 의해서 2023년 2월 25일 만들어졌다냥.</P>
         <P>
             <Lnk href={"https://esolangs.org/wiki/Brainfuck"}>Brainfuck</Lnk> 언어를 기반으로 하여 약 한 시간만에 구상 및 구현되었으며,<br />
             이후 계속해서 발전시켜 왔다냥.
@@ -21,12 +21,6 @@ export default function DocsIndex() {
         </P>
         <P>
             혹은, <Lnk href={"https://toss.me/sserve"}>금전적인 도움</Lnk>을 줄 수도 있다냥. (설마.. 냥랭을 위해 돈을 내주겠다고냥..?)
-        </P>
-        <P>
-            현재 냥랭 팀에는 3명이 이 세상의 귀여움을 위해 일하고 있다냥.<br />
-            메인 개발자 <Lnk href={"https://github.com/sserve-kr"}>서브</Lnk>!<br />
-            메인 기여 + 포매터 개발자 <Lnk href={"https://github.com/abiriadev"}>아비리아</Lnk>!<br />
-            비주얼라이저 개발자 <Lnk href={"https://github.com/MincoMK"}>밍코</Lnk>!
         </P>
     </DocsTemplate>
 }
