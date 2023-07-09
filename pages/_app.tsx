@@ -14,11 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
         openGraph={{
           type: 'website',
           locale: 'ko_IE',
-          url: 'https://nyan.sserve.work/',
+          url: 'https://nyanlang.org/',
           siteName: '냥랭',
           images: [
             {
-                url: 'https://nyan.sserve.work/nyanlang.png',
+                url: 'https://nyanlang.org/nyanlang.png',
             }
           ]
         }}
